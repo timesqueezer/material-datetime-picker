@@ -246,7 +246,8 @@ var defaults$$1 = function defaults$$1() {
     // allow any dates
     dateValidator: undefined,
 
-    closeOnDateSelect: true
+    closeOnDateSelect: true,
+    closeOnEscape: true
   };
 };
 
@@ -331,7 +332,7 @@ var DateTimePicker = function (_Events) {
     value: function _hide() {
       var _this2 = this;
 
-      this.pickerEl.classList.remove('open');
+      this.pickerEl.classList.remove('c-datepicker--open');
       window.setTimeout(function () {
         _this2.options.container.removeChild(_this2.pickerEl);
         document.body.removeChild(_this2.scrimEl);
@@ -419,6 +420,18 @@ var DateTimePicker = function (_Events) {
       this.$('.js-show-clock').addEventListener('click', function (e) {
         return _this4.clickShowClock(e);
       }, false);
+
+      this.scrimEl.addEventListener('click', function (e) {
+        return _this4.close();
+      }, false);
+
+      if (this.options.closeOnEscape) {
+        document.addEventListener('keydown', function (e) {
+          if (e.keyCode == 27) {
+            _this4.close();
+          }
+        }, false);
+      }
 
       return this;
     }
