@@ -250,7 +250,9 @@ var defaults$$1 = function defaults$$1() {
     // the container to append the picker
     container: document.body,
     // allow any dates
-    dateValidator: undefined
+    dateValidator: undefined,
+
+    closeOnDateSelect: true
   };
 };
 
@@ -349,6 +351,8 @@ var DateTimePicker = function (_Events) {
       var _this3 = this;
 
       this.delegateEvents();
+
+      this.shouldDisplayTime();
       // add the animation classes on the next animation tick
       // so that they actually work
       window.requestAnimationFrame(function () {
@@ -425,6 +429,17 @@ var DateTimePicker = function (_Events) {
       return this;
     }
   }, {
+    key: 'shouldDisplayTime',
+    value: function shouldDisplayTime() {
+      var timeDigits = /[hHaAmsSZ]+/;
+      console.log(this.$('.js-show-clock'));
+      if (!this.options.format.match(timeDigits)) {
+        this.$('.js-show-calendar').classList.add('c-datepicker-hidden');
+        this.$('.js-show-clock').classList.add('c-datepicker-hidden');
+        this.$('.js-date-time').classList.add('c-datepicker-hidden');
+      }
+    }
+  }, {
     key: 'clickSubmit',
     value: function clickSubmit() {
       this.close();
@@ -451,6 +466,8 @@ var DateTimePicker = function (_Events) {
 
       newValue.hour(number);
       this.set(newValue);
+
+      this.showMinuteClock();
       return this;
     }
   }, {
@@ -477,6 +494,11 @@ var DateTimePicker = function (_Events) {
       newValue.set({ year: year, month: month - 1, date: date });
 
       this.set(newValue);
+
+      if (this.options.closeOnDateSelect) {
+        this.clickSubmit();
+      }
+
       return this;
     }
   }, {
