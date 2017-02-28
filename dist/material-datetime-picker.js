@@ -291,6 +291,10 @@ var DateTimePicker = function (_Events) {
     value: function initializeRome(container, validator) {
       var onData = this.onChangeDate.bind(this);
 
+      if (container.length) {
+        container = container[0];
+      }
+
       return rome(container, {
         styles: this.options.styles,
         time: false,
@@ -445,7 +449,6 @@ var DateTimePicker = function (_Events) {
     key: 'shouldDisplayTime',
     value: function shouldDisplayTime() {
       var timeDigits = /[hHaAmsSZ]+/;
-      console.log(this.$('.js-show-clock'));
       if (!this.options.format.match(timeDigits)) {
         this.$('.js-show-calendar').classList.add('c-datepicker-hidden');
         this.$('.js-show-clock').classList.add('c-datepicker-hidden');
