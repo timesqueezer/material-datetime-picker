@@ -252,7 +252,7 @@ var defaults$$1 = function defaults$$1() {
     // allow any dates
     dateValidator: undefined,
 
-    closeOnDateSelect: true,
+    closeOnDateSelect: false,
     closeOnEscape: true
   };
 };
