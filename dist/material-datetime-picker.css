@@ -57,7 +57,12 @@
   height: 56px;
   line-height: 56px;
   font-size: 14px;
-  font-weight: 800; }
+  font-weight: 800;
+  cursor: pointer; }
+
+.rd-month-label:hover {
+  text-decoration: underline;
+  color: rgba(0, 0, 0, 0.8); }
 
 .c-datepicker__back, .c-datepicker__next, .c-datepicker__toggle {
   position: absolute;
@@ -239,6 +244,18 @@
 .c-datepicker--show-calendar.is-selected ~ .c-datepicker__clock {
   display: none; }
 
+.c-datepicker--show-years.is-selected ~ .c-datepicker__calendar {
+  display: none; }
+
+.c-datepicker--show-years.is-selected ~ .c-datepicker__clock {
+  display: none; }
+
+.c-datepicker--show-calendar.is-selected ~ .c-datepicker__years {
+  display: none; }
+
+.c-datepicker--show-time.is-selected ~ .c-datepicker__years {
+  display: none; }
+
 .c-datepicker__clock {
   position: relative;
   /* [1] */
@@ -415,6 +432,9 @@
     background: rgba(0, 0, 0, 0.05);
     border-radius: 50%; }
 
+.c-datepicker__years {
+  position: relative; }
+
 .u-hover-ball-effect, .c-datepicker__day-body, .c-datepicker__clock__num, .c-datepicker__clock__am-pm-toggle label {
   position: relative;
   cursor: pointer; }
@@ -549,3 +569,42 @@
 
 .c-datepicker-hidden {
   display: none !important; }
+
+.c-datepicker__year-table {
+  width: 100%; }
+  .c-datepicker__year-table td {
+    padding: 18px 0; }
+    .c-datepicker__year-table td a {
+      padding: 18px 0;
+      color: rgba(0, 0, 0, 0.8);
+      text-decoration: none; }
+    .c-datepicker__year-table td:hover a {
+      text-decoration: underline;
+      color: black; }
+    .c-datepicker__year-table td.active {
+      background: rgba(0, 0, 0, 0.1); }
+  .c-datepicker__year-table thead td, .c-datepicker__year-table tfoot td {
+    padding: 0 0; }
+    .c-datepicker__year-table thead td a, .c-datepicker__year-table tfoot td a {
+      padding: 3px 0;
+      width: 100%;
+      display: block;
+      cursor: pointer; }
+      .c-datepicker__year-table thead td a:hover, .c-datepicker__year-table tfoot td a:hover {
+        text-decoration: underline;
+        color: black; }
+
+.js-years-past, .js-years-future {
+  font-family: 'Material Icons';
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "liga" 1;
+  font-style: normal;
+  text-transform: none;
+  line-height: 1;
+  font-size: 24px; }
+
+.js-years-past:before {
+  content: 'keyboard_arrow_up'; }
+
+.js-years-future:before {
+  content: 'keyboard_arrow_down'; }

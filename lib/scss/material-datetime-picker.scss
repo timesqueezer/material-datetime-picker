@@ -78,6 +78,12 @@ $primary: #00bcd4 !default;
   line-height: 56px;
   font-size: 14px;
   font-weight: 800;
+  cursor: pointer;
+}
+
+.rd-month-label:hover {
+  text-decoration: underline;
+  color: rgba(0, 0, 0, 0.8);
 }
 
 .c-datepicker__back, .c-datepicker__next, .c-datepicker__toggle {
@@ -315,6 +321,22 @@ $primary: #00bcd4 !default;
   display: none;
 }
 
+.c-datepicker--show-years.is-selected ~ .c-datepicker__calendar {
+  display: none;
+}
+
+.c-datepicker--show-years.is-selected ~ .c-datepicker__clock {
+  display: none;
+}
+
+.c-datepicker--show-calendar.is-selected ~ .c-datepicker__years {
+  display: none;
+}
+
+.c-datepicker--show-time.is-selected ~ .c-datepicker__years {
+  display: none;
+}
+
 @mixin putOnCircle(
           $nb-items, //Number of items
           $circle-size, //Parent size
@@ -393,6 +415,10 @@ $primary: #00bcd4 !default;
     background: rgba(0, 0, 0, 0.05);
     border-radius: 50%;
   }
+}
+
+.c-datepicker__years {
+  position: relative;
 }
 
 .u-hover-ball-effect {
@@ -568,4 +594,64 @@ $primary: #00bcd4 !default;
 
 .c-datepicker-hidden {
   display: none !important;
+}
+
+.c-datepicker__year-table {
+  width: 100%;
+
+  td {
+    padding: 18px 0;
+    // cursor: pointer;
+
+    a {
+      padding: 18px 0;
+      color: rgba(0, 0, 0, 0.8);
+      text-decoration: none;
+    }
+
+    &:hover a {
+      text-decoration: underline;
+      color: rgba(0, 0, 0, 1);
+    }
+
+    &.active {
+      background: rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  thead td, tfoot td {
+    padding: 0 0;
+
+    a {
+      padding: 3px 0;
+      width: 100%;
+      display: block;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+        color: rgba(0, 0, 0, 1);
+      }
+    }
+  }
+}
+
+.js-years-past, .js-years-future {
+  font-family: 'Material Icons';
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "liga" 1;
+  font-style: normal;
+  text-transform: none;
+  line-height: 1;
+  font-size: 24px;
+}
+
+.js-years-past {
+  &:before {
+    content: 'keyboard_arrow_up';
+  }
+}
+
+.js-years-future:before {
+  content: 'keyboard_arrow_down';
 }
