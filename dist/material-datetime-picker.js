@@ -332,7 +332,7 @@ var DateTimePicker = function (_Events) {
         this.setTime(this.options.default);
       }
 
-      this.initializeRome(this.$('.' + this.options.styles.container), this.options.dateValidator);
+      this.rome = this.initializeRome(this.$('.' + this.options.styles.container), this.options.dateValidator);
 
       this._show();
     }
@@ -481,6 +481,8 @@ var DateTimePicker = function (_Events) {
       newValue.year(newYear);
 
       this.set(newValue);
+      this.rome.setValue(newValue);
+      this.clickShowCalendar();
     }
   }, {
     key: 'buildYearsTable',
@@ -523,9 +525,7 @@ var DateTimePicker = function (_Events) {
     value: function clickYearsShift(e, future) {
       future = future || false;
       var shift = 20;
-      console.log(this.maxYear);
       this.maxYear += future ? shift : -shift;
-      console.log(this.maxYear);
 
       this.buildYearsTable();
     }
