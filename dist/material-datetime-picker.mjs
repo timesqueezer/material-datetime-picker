@@ -491,6 +491,7 @@ var DateTimePicker = function (_Events) {
     value: function shouldDisplayTime() {
       var timeDigits = /[hHaAmsSZ]+/;
       if (!this.options.format.match(timeDigits)) {
+        this.options.showTime = false;
         this.$('.js-show-calendar').classList.add('c-datepicker-hidden');
         this.$('.js-show-clock').classList.add('c-datepicker-hidden');
         this.$('.js-date-time').classList.add('c-datepicker-hidden');
@@ -794,6 +795,9 @@ var DateTimePicker = function (_Events) {
   }, {
     key: 'setTime',
     value: function setTime(time) {
+      if (this.options.showTime !== undefined && this.options.showTime == false) {
+        return this;
+      }
       var m = moment(time);
       var minuteAsInt = Math.round(parseInt(m.format('mm'), 10) / 5) * 5;
       m.minutes(minuteAsInt);
@@ -816,7 +820,12 @@ var DateTimePicker = function (_Events) {
         oldActiveMinutes.classList.remove(this.options.styles.clockNum + '--active');
       }
 
-      this.$('.js-clock-hours .' + this.options.styles.clockNum + '[data-number="' + hourAsInt + '"]').classList.add(this.options.styles.clockNum + '--active');
+      var hoursEl = this.$('.js-clock-hours .' + this.options.styles.clockNum + '[data-number="' + hourAsInt + '"]');
+      if (!hoursEl) {
+        return this;
+      } else {
+        hoursEl.classList.add(this.options.styles.clockNum + '--active');
+      }
       this.$('.js-clock-minutes .' + this.options.styles.clockNum + '[data-number="' + minuteAsInt + '"]').classList.add(this.options.styles.clockNum + '--active');
 
       this.value.hours(m.hours());
